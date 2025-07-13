@@ -1,7 +1,7 @@
 # Pathogen
 
-**Pathogen** is a top-down 2D game developed in C++ for the Stop Killing Games Community Jam with the theme **"Limited Lifetime."**
-https://itch.io/jam/stop-killing-games-game-jam
+**Pathogen** is a top-down 2D game developed in C++ for the 
+[Stop Killing Games Community Jam](https://itch.io/jam/stop-killing-games-game-jam) with the theme **"Limited Lifetime."**
 
 ---
 
@@ -19,7 +19,7 @@ https://itch.io/jam/stop-killing-games-game-jam
 ### Requirements
 
 - CMake 3.20+
-- Any compiler with C++20 support
+- A compiler with full C++20 support
 
 ### Instructions
 
@@ -32,7 +32,7 @@ https://itch.io/jam/stop-killing-games-game-jam
 
 ### Note
 
-I am fairly new to programming in C++, so this may not build without using Visual Studio 17 2022 compiler.
+This project was developed using Visual Studio 2022 on Windows. Other compilers may work, but are not tested yet.
 
 ---
 
@@ -44,3 +44,16 @@ the gameplay emphasizes fast-paced survival, absorption mechanics, and environme
 The goal is to survive just long enough to grow, and with each generation, you gain momentum for the next.
 
 ### How to Play
+
+- **WASD** Movement
+
+## License
+
+MIT (See LICENSE.txt)
+
+---
+
+## Author
+
+Made by [GitBoss12291](https://github.com/GitBoss12291)
+Created for the [Stop Killing Games Community Jam](https://itch.io/jam/stop-killing-games-game-jam)

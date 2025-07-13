@@ -25,7 +25,7 @@
 
 ```bash
 	git clone https://github.com/GitBoss12291/Pathogen.git
-	cd pathogen
+	cd Pathogen
 	cmake -B build -G "[Your C++ Compiler]" -A x64
 	cmake --build build --config Release
 ```
@@ -49,11 +49,11 @@ The goal is to survive just long enough to grow, and with each generation, you g
 
 ## License
 
-MIT (See LICENSE.txt)
+MIT --- See ['LICENSE.txt'](LICENSE.txt)
 
 ---
 
 ## Author
 
 Made by [GitBoss12291](https://github.com/GitBoss12291)
-Created for the [Stop Killing Games Community Jam](https://itch.io/jam/stop-killing-games-game-jam)
+Created for the [Stop Killing Games Community Jam](https://itch.io/jam/stop-killing-games-game-jam) -- July 2025

@@ -7,10 +7,10 @@
 
 ## Built With
 
-- **GLFW** — windowing and input
-- **GLAD** — OpenGL loader
+- **GLFW** - windowing and input
+- **GLAD** - OpenGL loader
 - **C++20**
-- No external engine — all rendering and logic is custom-built
+- No external engine - all rendering and logic is custom-built
 
 ---
 
@@ -49,7 +49,7 @@ The goal is to survive just long enough to grow, and with each generation, you g
 
 ## License
 
-MIT — See ['LICENSE.txt'](LICENSE.txt)
+MIT - See ['LICENSE.txt'](LICENSE.txt)
 
 ---
 

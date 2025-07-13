@@ -26,13 +26,13 @@ https://itch.io/jam/stop-killing-games-game-jam
 ```bash
 	git clone https://github.com/GitBoss12291/Pathogen.git
 	cd pathogen
-	cmake -B build -G "Visual Studio 17 2022" -A x64
+	cmake -B build -G "[Your C++ Compiler]" -A x64
 	cmake --build build --config Release
 ```
 
 ### Note
 
-I am fairly
+I am fairly new to programming in C++, so this may not build without using Visual Studio 17 2022 compiler.
 
 ---
 

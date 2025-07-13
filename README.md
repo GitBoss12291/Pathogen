@@ -24,11 +24,15 @@ https://itch.io/jam/stop-killing-games-game-jam
 ### Instructions
 
 ```bash
-	git clone https://github.com/yourname/pathogen.git
+	git clone https://github.com/GitBoss12291/Pathogen.git
 	cd pathogen
 	cmake -B build -G "Visual Studio 17 2022" -A x64
 	cmake --build build --config Release
 ```
+
+### Note
+
+I am fairly
 
 ---
 

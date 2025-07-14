@@ -3,6 +3,21 @@
 
 #include <iostream>
 
+const float CLEAR_R = 0.1f;
+const float CLEAR_G = 0.075f;
+const float CLEAR_B = 0.125f;
+const float CLEAR_A = 1.0f;
+
+void resizeCallback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+    
+    glClearColor(CLEAR_R, CLEAR_G, CLEAR_B, CLEAR_A);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glfwSwapBuffers(window);
+}
+
 int main()
 {
     if (!glfwInit())
@@ -11,7 +26,7 @@ int main()
         return 0;
     }
 
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Pathogen", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(960, 720, "Pathogen", NULL, NULL);
 
     if (window == NULL) 
     {
@@ -25,12 +40,12 @@ int main()
         return -1;
     }
 
+    glfwSetWindowSizeCallback(window, resizeCallback);
+
     while(!glfwWindowShouldClose(window))
     {
-        glClearColor(0.1f, 0.075f, 0.125f, 1.0f);
+        glClearColor(CLEAR_R, CLEAR_G, CLEAR_B, CLEAR_A);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        
 
         glfwSwapBuffers(window);
         glfwPollEvents();

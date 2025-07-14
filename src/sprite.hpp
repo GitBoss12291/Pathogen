@@ -9,6 +9,6 @@ namespace pathogen
         float x, y;
         float rotation = 0.0f;
         float scale = 1.0f;
-        int textureID = -1;
+        unsigned int textureID = -1;
     };
 }

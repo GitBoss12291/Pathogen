@@ -9,6 +9,7 @@
 
 - **GLFW** - windowing and input
 - **GLAD** - OpenGL loader
+- **GLM**  - OpenGL math library
 - **C++20**
 - No external engine - all rendering and logic is custom-built
 

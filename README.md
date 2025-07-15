@@ -50,7 +50,7 @@ The goal is to survive just long enough to grow, and with each generation, you g
 
 ## License
 
-MIT - See ['LICENSE.txt'](LICENSE.txt)
+MIT - See [=='LICENSE.txt'==](LICENSE.txt)
 
 ---
 

@@ -13,6 +13,13 @@ namespace pathogen
         float zoom = 1.0f;
     };
 
+    enum class GameState
+    {
+        Menu = 0,
+        Play,
+        Edit
+    };
+
     struct Game
     {
         ~Game();
@@ -26,6 +33,7 @@ namespace pathogen
         void tick(float dt);
         void draw();
     
+        GameState state = GameState::Menu;
         std::vector<GameObject*> gameObjects;
         Camera camera;
         SpriteRenderer* spriteRenderer = nullptr;
@@ -35,6 +43,9 @@ namespace pathogen
     private:
         inline static int nextID = 0;
         inline int getNextID() { return ++nextID; }
+        void menu(float dt);
+        void play(float dt);
+        void edit(float dt);
 
     };
 }

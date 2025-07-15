@@ -33,6 +33,14 @@ namespace pathogen
 		return player;
 	}
 
+	Enemy* spawnEnemy(Player* player)
+	{
+		auto* enemy = new Enemy();
+		enemy->sprite.texPath = "Pathogen.png";
+		enemy->setPlayer(player);
+		return enemy;
+	}
+
 	void Game::init()
 	{
 		spriteRenderer = new SpriteRenderer();
@@ -41,9 +49,7 @@ namespace pathogen
 
 		addGameObject(player);
 
-		auto* testEnemy = new Enemy();
-		testEnemy->sprite.texPath = "Pathogen.png";
-		testEnemy->setPlayer(player);
+		auto* testEnemy = spawnEnemy(player);
 
 		addGameObject(testEnemy);
 	}
@@ -82,6 +88,35 @@ namespace pathogen
 	{
 		time += dt;
 		
+		switch (state)
+		{
+		case GameState::Menu:
+			menu(dt);
+			break;
+		case GameState::Play:
+			play(dt);
+			break;
+		case GameState::Edit:
+			edit(dt);
+			break;
+		}
+	}
+
+	void Game::draw()
+	{
+		for (auto& obj : gameObjects)
+		{
+			obj->draw(spriteRenderer, camera.x, camera.y);
+		}
+	}
+
+	void Game::menu(float dt)
+	{
+
+	}
+
+	void Game::play(float dt)
+	{
 		for (auto& obj : gameObjects)
 		{
 			obj->update(dt);
@@ -94,12 +129,9 @@ namespace pathogen
 		}
 	}
 
-	void Game::draw()
+	void Game::edit(float dt)
 	{
-		for (auto& obj : gameObjects)
-		{
-			obj->draw(spriteRenderer, camera.x, camera.y);
-		}
+
 	}
 
 }

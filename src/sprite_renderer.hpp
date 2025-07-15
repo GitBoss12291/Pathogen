@@ -12,6 +12,7 @@ namespace pathogen
     public:
         void init();
         void drawSprite(Sprite& sprite, float x, float y, float camX, float camY);
+        void drawRect(float x, float y, float width, float height, float* color);
         void shutdown();
 
         void setScreenDim(int width, int height);
@@ -24,7 +25,10 @@ namespace pathogen
         float screenHeight;
         float originX;
         float originY;
+
+        unsigned int whiteTextureID;
         
         Shader* shader = nullptr;
+        Shader* uiShader = nullptr;
     };
 }

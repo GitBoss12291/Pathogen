@@ -14,6 +14,7 @@ namespace pathogen
     void SpriteRenderer::init()
     {
         shader = new Shader("assets/shaders/basic.vert", "assets/shaders/basic.frag");
+        uiShader = new Shader("assets/shaders/ui.vert", "assets/shaders/ui.frag");
     
         float vertices[] = {
             // pos         // tex
@@ -56,7 +57,7 @@ namespace pathogen
         }
 
         glm::mat4 modelMat = glm::mat4(1.0f);
-        modelMat = glm::translate(modelMat, glm::vec3(sprite.x + originX, sprite.y + originY, 0.0f));
+        modelMat = glm::translate(modelMat, glm::vec3(x + originX, y + originY, 0.0f));
         modelMat = glm::scale(modelMat, glm::vec3(sprite.width * sprite.scale, sprite.height * sprite.scale, 1.0f));
 
         glm::mat4 projMat = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -1.0f, 1.0f);
@@ -70,6 +71,28 @@ namespace pathogen
         shader->setMat4("uView", glm::value_ptr(viewMat));
 
         glBindTexture(GL_TEXTURE_2D, sprite.textureID);
+        glBindVertexArray(quadVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
+
+    void SpriteRenderer::drawRect(float x, float y, float width, float height, float* color)
+    {
+        if (!uiShader)
+        {
+            std::cerr << "SpriteRenderer not initialized, Shader is still nullptr" << std::endl;
+            return;
+        }
+
+        float xy[2] = { x, y };
+        float size[2] = { width, height };
+        float res[2] = { screenWidth, screenHeight };
+
+        uiShader->use();
+        uiShader->setVec2("uPos", xy);
+        uiShader->setVec2("uSize", size);
+        uiShader->setVec4("uColor", color);
+        uiShader->setVec2("uResolution", res);
+        
         glBindVertexArray(quadVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }

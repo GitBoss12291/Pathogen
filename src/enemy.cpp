@@ -13,8 +13,8 @@ namespace pathogen
 	{
 		if (player)
 		{
-			float directionX = player->sprite.x - sprite.x;
-			float directionY = player->sprite.y - sprite.y;
+			float directionX = player->x - x;
+			float directionY = player->y - y;
 			
 			float magnitude = std::sqrt(directionX * directionX + directionY * directionY);
 
@@ -23,8 +23,8 @@ namespace pathogen
 				float normDirX = directionX / magnitude;
 				float normDirY = directionY / magnitude;
 
-				sprite.x += normDirX * MOVE_SPEED * dt;
-				sprite.y += normDirY * MOVE_SPEED * dt;
+				x += normDirX * MOVE_SPEED * dt;
+				y += normDirY * MOVE_SPEED * dt;
 			}
 		}
 	}

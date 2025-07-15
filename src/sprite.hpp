@@ -8,7 +8,6 @@ namespace pathogen
     {
         unsigned int instanceID = -1;
 
-        float x = 0.0f, y = 0.0f;
         float rotation = 0.0f;
         float scale = 1.0f;
         float width = 100, height = 100;

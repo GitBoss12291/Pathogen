@@ -6,6 +6,7 @@ namespace pathogen
 {
     class GameObject;
     class SpriteRenderer;
+    class Editor;
 
     struct Camera
     {
@@ -36,6 +37,7 @@ namespace pathogen
         GameState state = GameState::Menu;
         std::vector<GameObject*> gameObjects;
         Camera camera;
+        Editor* editor = nullptr;
         SpriteRenderer* spriteRenderer = nullptr;
         float time = 0.0f;
         float deltaTime = 0.0f;

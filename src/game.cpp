@@ -8,6 +8,7 @@
 #include "input_handler.hpp"
 #include "player.hpp"
 #include "enemy.hpp"
+#include "editor.hpp"
 
 namespace pathogen
 {
@@ -43,6 +44,8 @@ namespace pathogen
 
 	void Game::init()
 	{
+		state = GameState::Menu();
+
 		spriteRenderer = new SpriteRenderer();
 		spriteRenderer->init();
 		auto* player = setupPlayer();
@@ -123,15 +126,22 @@ namespace pathogen
 
 			if (obj->getType() == ObjectType::Player)
 			{
-				camera.x = obj->sprite.x;
-				camera.y = obj->sprite.y;
+				camera.x = obj->x;
+				camera.y = obj->y;
 			}
 		}
 	}
 
 	void Game::edit(float dt)
 	{
+		if (!editor)
+		{
+			std::cerr << "Game not initialized, Editor is nullptr." 
+				"Always make sure to initialize Game before calling any methods" << std::endl;
+			return;
+		}
 
+		editor->tick(dt);
 	}
 
 }

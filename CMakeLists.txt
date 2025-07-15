@@ -34,7 +34,7 @@ target_include_directories(glad PUBLIC deps/glad/include deps/stb_image deps/glf
 add_executable(Pathogen main.cpp
     "src/sprite_renderer.cpp"
     "src/shader.cpp"
- "src/game.cpp"  "src/input_handler.cpp" "src/game_object.cpp" "src/player.cpp" "src/enemy.cpp" "src/cell.cpp" "src/part.cpp" "src/editor.cpp")
+ "src/game.cpp"  "src/input_handler.cpp" "src/game_object.cpp" "src/player.cpp" "src/enemy.cpp" "src/cell.cpp" "src/part.cpp" "src/editor.cpp" "src/ui_panel.cpp")
 
 add_custom_command(TARGET Pathogen POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory

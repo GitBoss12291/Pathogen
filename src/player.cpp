@@ -6,28 +6,26 @@
 
 namespace pathogen
 {
-	const float MOVE_SPEED = 200.0f;
-
 	void Player::update(float dt)
 	{
 		if (InputHandler::getKey(GLFW_KEY_W) == GLFW_PRESS)
 		{
-			sprite.y += MOVE_SPEED * dt;
+			sprite.y += cell.stats.speed * dt;
 		}
 
 		if (InputHandler::getKey(GLFW_KEY_S) == GLFW_PRESS)
 		{
-			sprite.y -= MOVE_SPEED * dt;
+			sprite.y -= cell.stats.speed * dt;
 		}
 
 		if (InputHandler::getKey(GLFW_KEY_A) == GLFW_PRESS)
 		{
-			sprite.x -= MOVE_SPEED * dt;
+			sprite.x -= cell.stats.speed * dt;
 		}
 
 		if (InputHandler::getKey(GLFW_KEY_D) == GLFW_PRESS)
 		{
-			sprite.x += MOVE_SPEED * dt;
+			sprite.x += cell.stats.speed * dt;
 		}
 	}
 

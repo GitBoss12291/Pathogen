@@ -7,6 +7,7 @@ namespace pathogen
 {
 	void Cell::addPart(Part* part)
 	{
+		part->host = this;
 		parts.push_back(part);
 		updateStats();
 	}
@@ -17,7 +18,7 @@ namespace pathogen
 
 		for (auto& part : parts)
 		{
-			part->modifyStats(*this);
+			part->modifyStats();
 		}
 	}
 

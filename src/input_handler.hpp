@@ -11,6 +11,8 @@ namespace pathogen
 		
 		static int getKey(int key);
 
+		static float* getMousePos();
+
 	private:
 		static GLFWwindow* window;
 	};

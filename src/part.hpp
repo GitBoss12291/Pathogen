@@ -1,10 +1,11 @@
 #pragma once
 
+#include "sprite.hpp"
+
 namespace pathogen
 {
 	enum class PartType { Flagella, Spike, Shell };
-	
-	struct Sprite;
+
 	class Cell;
 	class SpriteRenderer;
 

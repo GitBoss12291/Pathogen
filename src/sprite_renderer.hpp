@@ -11,7 +11,7 @@ namespace pathogen
     {
     public:
         void init();
-        void drawSprite(Sprite& sprite, float camX, float camY);
+        void drawSprite(Sprite& sprite, float x, float y, float camX, float camY);
         void shutdown();
 
         void setScreenDim(int width, int height);

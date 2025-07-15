@@ -18,6 +18,7 @@ namespace pathogen
 	public:
 		unsigned int instanceID = 0;
 
+		float x, y;
 		Sprite sprite;
 		virtual void update(float dt) = 0;
 		virtual void draw(SpriteRenderer* renderer, float camX, float camY);

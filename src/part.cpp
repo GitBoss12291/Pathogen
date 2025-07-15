@@ -9,9 +9,9 @@ namespace pathogen
 	{
 		if (!host) return;
 
-		sprite.x = host->baseSprite.x + offsetX;
-		sprite.y = host->baseSprite.y + offsetY;
+		float x = host->x + offsetX;
+		float y = host->y + offsetY;
 
-		renderer->drawSprite(sprite, camX, camY);
+		renderer->drawSprite(sprite, x, y, camX, camY);
 	}
 }

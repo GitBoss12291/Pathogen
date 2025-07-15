@@ -5,6 +5,11 @@
 
 namespace pathogen
 {
+	void Cell::changeSprite(Sprite& sprite)
+	{
+		this->sprite = &sprite;
+	}
+
 	void Cell::addPart(Part* part)
 	{
 		part->host = this;
@@ -22,9 +27,9 @@ namespace pathogen
 		}
 	}
 
-	void Cell::draw(SpriteRenderer* renderer, float camX, float camY)
+	void Cell::draw(SpriteRenderer* renderer, float camX, float camY, float x, float y)
 	{
-		renderer->drawSprite(baseSprite, camX, camY);
+		renderer->drawSprite(*sprite, x, y, camX, camY);
 
 		for (auto& part : parts)
 		{

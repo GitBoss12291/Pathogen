@@ -43,7 +43,7 @@ namespace pathogen
     }
 
     // Draw a Sprite on Screen
-    void SpriteRenderer::drawSprite(Sprite& sprite, float camX, float camY)
+    void SpriteRenderer::drawSprite(Sprite& sprite, float x, float y, float camX, float camY)
     {
         if (!shader)
         {

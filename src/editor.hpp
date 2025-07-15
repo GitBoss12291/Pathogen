@@ -2,6 +2,7 @@
 
 namespace pathogen
 {
+	class SpriteRenderer;
 	class Cell;
 	class Part;
 
@@ -24,10 +25,9 @@ namespace pathogen
 
 	private:
 		Cell* currentCell;
-		Part* selectedpart;
+		Part* selectedPart;
 		EditMode mode = EditMode::None;
 		
-		float cursorX = 0.0f;
-		float cursorY = 0.0f;
+		float* cursorPos;
 	};
 }

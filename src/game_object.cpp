@@ -5,6 +5,6 @@ namespace pathogen
 {
 	void GameObject::draw(SpriteRenderer* renderer, float camX, float camY)
 	{
-		renderer->drawSprite(sprite, camX, camY);
+		renderer->drawSprite(sprite, x, y, camX, camY);
 	}
 }

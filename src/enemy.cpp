@@ -7,6 +7,7 @@ namespace pathogen
 {
 	const float MOVE_SPEED = 150.0f;
 	const float MIN_DIST = 100.0f;
+	const float MAX_DIST = 300.0f;
 
 	void Enemy::update(float dt)
 	{

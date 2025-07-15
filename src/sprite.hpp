@@ -6,9 +6,14 @@ namespace pathogen
 {
     struct Sprite
     {
-        float x, y;
+        unsigned int instanceID = -1;
+
+        float x = 0.0f, y = 0.0f;
         float rotation = 0.0f;
         float scale = 1.0f;
-        unsigned int textureID = -1;
+        float width = 100, height = 100;
+
+        unsigned int textureID = 0;
+        const char* texPath;
     };
 }

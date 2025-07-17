@@ -16,7 +16,7 @@ namespace pathogen
 	class GameObject
 	{
 	public:
-		unsigned int instanceID = 0;
+		int instanceID = -1;
 
 		float x, y;
 		Sprite sprite;

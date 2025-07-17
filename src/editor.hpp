@@ -1,5 +1,8 @@
 #pragma once
 
+#include <glm/vec2.hpp>
+#include <vector>
+
 namespace pathogen
 {
 	class SpriteRenderer;
@@ -24,10 +27,13 @@ namespace pathogen
 		void draw(SpriteRenderer* renderer, float camX, float camY);
 
 	private:
-		Cell* currentCell;
-		Part* selectedPart;
+		void drawUI(SpriteRenderer* renderer);
+
+		Cell* currentCell = nullptr;
+		Part* selectedPart = nullptr;
 		EditMode mode = EditMode::None;
+		std::vector<Part> availableParts = {};
 		
-		float* cursorPos;
+		glm::vec2 cursorPos = {};
 	};
 }

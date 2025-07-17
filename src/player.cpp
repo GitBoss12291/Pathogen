@@ -8,6 +8,20 @@ namespace pathogen
 {
 	void Player::update(float dt)
 	{
+		move(dt);
+	
+	}
+
+	void Player::draw(SpriteRenderer* renderer, float camX, float camY)
+	{
+		cell.x = x;
+		cell.y = y;
+		if (!cell.sprite) cell.sprite = &sprite;
+		cell.draw(renderer, camX, camY, x, y);
+	}
+
+	void Player::move(float dt)
+	{
 		if (InputHandler::getKey(GLFW_KEY_W) == GLFW_PRESS)
 		{
 			y += cell.stats.speed * dt;
@@ -27,13 +41,5 @@ namespace pathogen
 		{
 			x += cell.stats.speed * dt;
 		}
-	}
-
-	void Player::draw(SpriteRenderer* renderer, float camX, float camY)
-	{
-		cell.x = x;
-		cell.y = y;
-		renderer->drawSprite(sprite, x, y, camX, camY);
-		cell.draw(renderer, camX, camY, x, y);
 	}
 }

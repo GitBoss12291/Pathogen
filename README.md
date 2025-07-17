@@ -1,7 +1,18 @@
 # Pathogen
 
 **Pathogen** is a top-down 2D game developed in C++ for the 
-[Stop Killing Games Community Jam](https://itch.io/jam/stop-killing-games-game-jam) with the theme **"Limited Lifetime."**
+[Stop Killing Games Community Jam](https://itch.io/jam/stop-killing-games-game-jam), with the theme **"Limited Lifetime."**
+
+---
+
+## Table of Contents
+
+- [Built With](#built-with)
+- [How to Build](#how-to-build)
+- [Description](#description)
+- [How to Play](#how-to-play)
+- [License](#license)
+- [Author](#author)
 
 ---
 
@@ -9,13 +20,13 @@
 
 - **GLFW** - windowing and input
 - **GLAD** - OpenGL loader
-- **GLM**  - OpenGL math library
+- **GLM**  - Math Library for OpenGL
 - **C++20**
 - No external engine - all rendering and logic is custom-built
 
 ---
 
-## Building
+## How to Build
 
 ### Requirements
 
@@ -31,9 +42,7 @@
 	cmake --build build --config Release
 ```
 
-### Note
-
-This project was developed using Visual Studio 2022 on Windows. Other compilers may work, but are not tested yet.
+>This project was developed using Visual Studio 2022 on Windows. Other compilers may work, but are not tested yet.
 
 ---
 
@@ -47,10 +56,14 @@ The goal is to survive just long enough to grow, and with each generation, you g
 ### How to Play
 
 - **WASD** Movement
+- Avoid threats, absorb other cells, and evolve by collecting new parts
+- Make your cell your own with the cell editor 
+
+---
 
 ## License
 
-MIT - See ['LICENSE.txt'](LICENSE.txt)
+MIT - See [LICENSE.txt](LICENSE.txt)
 
 ---
 

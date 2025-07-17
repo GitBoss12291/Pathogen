@@ -12,6 +12,8 @@ namespace pathogen
 	class Part
 	{
 	public:
+		int instanceID = -1;
+
 		Cell* host;
 		PartType type;
 		Sprite sprite;

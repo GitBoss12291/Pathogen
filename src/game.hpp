@@ -1,12 +1,14 @@
 #pragma once
 
-#include <vector>
+#include <unordered_map>
 
 namespace pathogen
 {
     class GameObject;
     class SpriteRenderer;
     class Editor;
+    class Player;
+    class Enemy;
 
     struct Camera
     {
@@ -31,11 +33,13 @@ namespace pathogen
 
         void addGameObject(GameObject* gameObject);
 
+        GameObject* getGameObjectByID(int instanceID);
+
         void tick(float dt);
-        void draw();
+        void draw() const;
     
         GameState state = GameState::Menu;
-        std::vector<GameObject*> gameObjects;
+        std::unordered_map<int, GameObject*> gameObjects;
         Camera camera;
         Editor* editor = nullptr;
         SpriteRenderer* spriteRenderer = nullptr;
@@ -48,6 +52,11 @@ namespace pathogen
         void menu(float dt);
         void play(float dt);
         void edit(float dt);
+
+        Player* setupPlayer();
+        Enemy* spawnEnemy(Player* player);
+
+        int playerID = -1;
 
     };
 }

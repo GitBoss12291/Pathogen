@@ -1,5 +1,6 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include <unordered_map>
 
 #include "game.hpp"
 #include "game_object.hpp"
@@ -8,14 +9,16 @@
 #include "input_handler.hpp"
 #include "player.hpp"
 #include "enemy.hpp"
+#include "cell.hpp"
+#include "part.hpp"
 #include "editor.hpp"
 
 namespace pathogen
 {
 	Game::~Game()
 	{
-		for (GameObject* obj : gameObjects)
-			delete obj;
+		for (auto& pair : gameObjects)
+			delete pair.second;
 		gameObjects.clear();
 
 		if (spriteRenderer)
@@ -26,15 +29,20 @@ namespace pathogen
 		}
 	}
 
-	Player* setupPlayer()
+	Player* Game::setupPlayer()
 	{
 		auto* player = new Player();
 		player->sprite.texPath = "Pathogen.png";
-		
+
+		Cell playerCell;
+		playerCell.sprite = &player->sprite;
+		player->cell = playerCell;
+		player->cell.instanceID = getNextID();
+
 		return player;
 	}
 
-	Enemy* spawnEnemy(Player* player)
+	Enemy* Game::spawnEnemy(Player* player)
 	{
 		auto* enemy = new Enemy();
 		enemy->sprite.texPath = "Pathogen.png";
@@ -51,6 +59,8 @@ namespace pathogen
 		auto* player = setupPlayer();
 
 		addGameObject(player);
+
+		playerID = player->instanceID;
 
 		auto* testEnemy = spawnEnemy(player);
 
@@ -72,25 +82,34 @@ namespace pathogen
 	// Adds a Game Object and generates a new id if it doesn't have one.
 	void Game::addGameObject(GameObject* gameObject)
 	{
-		if (gameObject->instanceID == 0)
+		if (gameObject->instanceID == -1)
 		{
 			gameObject->instanceID = getNextID();
 		}
-		for (size_t i = 0; i < gameObjects.size(); ++i)
+		if (gameObjects.find(gameObject->instanceID) != gameObjects.end())
 		{
-			if (gameObjects[i]->instanceID == gameObject->instanceID)
-			{
-				return;
-			}
+			return;
 		}
 
-		gameObjects.push_back(gameObject);
+		gameObjects[gameObject->instanceID] = gameObject;
+	}
+
+	GameObject* Game::getGameObjectByID(int instanceID)
+	{
+		auto it = gameObjects.find(instanceID);
+		if (it != gameObjects.end())
+		{
+			return it->second;
+		}
+
+		std::cerr << "Object with id: " << instanceID << " nonexistant" << std::endl;
+		return nullptr;
 	}
 
 	void Game::tick(float dt)
 	{
 		time += dt;
-		
+
 		switch (state)
 		{
 		case GameState::Menu:
@@ -105,23 +124,24 @@ namespace pathogen
 		}
 	}
 
-	void Game::draw()
+	void Game::draw() const
 	{
-		for (auto& obj : gameObjects)
+		for (const auto& pair : gameObjects)
 		{
-			obj->draw(spriteRenderer, camera.x, camera.y);
+			pair.second->draw(spriteRenderer, camera.x, camera.y);
 		}
 	}
 
 	void Game::menu(float dt)
 	{
-
+		
 	}
 
 	void Game::play(float dt)
 	{
-		for (auto& obj : gameObjects)
+		for (auto& pair : gameObjects)
 		{
+			GameObject* obj = pair.second;
 			obj->update(dt);
 
 			if (obj->getType() == ObjectType::Player)
@@ -136,10 +156,20 @@ namespace pathogen
 	{
 		if (!editor)
 		{
-			std::cerr << "Game not initialized, Editor is nullptr." 
+			std::cerr << "Game not initialized, Editor is nullptr."
 				"Always make sure to initialize Game before calling any methods" << std::endl;
 			return;
 		}
+
+		Player* player = dynamic_cast<Player*>(getGameObjectByID(playerID));
+
+		if (!player)
+		{
+			std::cerr << "Player not found for editor." << std::endl;
+			return;
+		}
+
+		editor->setTargetCell(&player->cell);
 
 		editor->tick(dt);
 	}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/vec2.hpp>
+
 struct GLFWwindow;
 
 namespace pathogen
@@ -10,8 +12,9 @@ namespace pathogen
 		static void init(GLFWwindow* win);
 		
 		static int getKey(int key);
+		static int getMouseButton(int button);
 
-		static float* getMousePos();
+		static glm::vec2 getMousePos();
 
 	private:
 		static GLFWwindow* window;

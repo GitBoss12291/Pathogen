@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <glm/vec4.hpp>
 
 namespace pathogen
 {
@@ -12,7 +13,7 @@ namespace pathogen
     public:
         void init();
         void drawSprite(Sprite& sprite, float x, float y, float camX, float camY);
-        void drawRect(float x, float y, float width, float height, float* color);
+        void drawRect(float x, float y, float width, float height, glm::vec4 color);
         void shutdown();
 
         void setScreenDim(int width, int height);

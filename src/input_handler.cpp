@@ -16,16 +16,19 @@ namespace pathogen
 		return glfwGetKey(window, key);
 	}
 
-	float* InputHandler::getMousePos()
+	int InputHandler::getMouseButton(int button)
+	{
+		return glfwGetMouseButton(window, button);
+	}
+
+	glm::vec2 InputHandler::getMousePos()
 	{
 		double x;
 		double y;
 
-		float pos[2];
-
 		glfwGetCursorPos(window, &x, &y);
-		pos[0] = static_cast<float>(x);
-		pos[1] = static_cast<float>(y);
+		
+		glm::vec2 pos = { x, y };
 
 		return pos;
 	}

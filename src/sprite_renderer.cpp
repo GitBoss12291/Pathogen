@@ -75,7 +75,7 @@ namespace pathogen
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
 
-    void SpriteRenderer::drawRect(float x, float y, float width, float height, float* color)
+    void SpriteRenderer::drawRect(float x, float y, float width, float height, glm::vec4 color)
     {
         if (!uiShader)
         {
@@ -90,7 +90,7 @@ namespace pathogen
         uiShader->use();
         uiShader->setVec2("uPos", xy);
         uiShader->setVec2("uSize", size);
-        uiShader->setVec4("uColor", color);
+        uiShader->setVec4("uColor", glm::value_ptr(color));
         uiShader->setVec2("uResolution", res);
         
         glBindVertexArray(quadVAO);

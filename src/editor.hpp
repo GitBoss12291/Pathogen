@@ -22,12 +22,15 @@ namespace pathogen
 	class Editor
 	{
 	public:
+		void setScreenDim(int height, int width);
 		void setTargetCell(Cell* cell);
 		void tick(float dt);
 		void draw(SpriteRenderer* renderer, float camX, float camY);
 
 	private:
 		void drawUI(SpriteRenderer* renderer);
+
+		int screenHeight, screenWidth;
 
 		Cell* currentCell = nullptr;
 		Part* selectedPart = nullptr;

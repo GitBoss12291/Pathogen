@@ -7,6 +7,12 @@
 
 namespace pathogen
 {
+	void Editor::setScreenDim(int width, int height)
+	{
+		screenHeight = height;
+		screenWidth = width;
+	}
+
 	void Editor::setTargetCell(Cell* cell)
 	{
 		currentCell = cell;
@@ -26,8 +32,8 @@ namespace pathogen
 		UIPanel partsPanel = UIPanel();
 		partsPanel.x = 0;
 		partsPanel.y = 0;
-		partsPanel.width = 280; // TODO: make widht and height dynamic.
-		partsPanel.height = 720;
+		partsPanel.width = screenWidth / 4.0f;
+		partsPanel.height = screenHeight;
 		partsPanel.borderSize = 2.0f;
 		partsPanel.fillColor = { 0.3f, 0.3f, 0.3f, 1.0f };
 		partsPanel.borderColor = { 0.8f, 0.8f, 0.8f, 1.0f };
@@ -62,7 +68,7 @@ namespace pathogen
 	{
 		drawUI(renderer);
 
-		float centerX = 0; // DO NOT CHANGE: for ease of reading
+		float centerX = 150.0f; // DO NOT CHANGE: for ease of reading
 		float centerY = 0; // DO NOT CHANGE: for ease of reading
 		if (currentCell)
 			currentCell->draw(renderer, camX, camY, centerX, centerY);

@@ -7,7 +7,7 @@ namespace pathogen
 	{
 		if (borderSize > 1e-6)
 		{
-			float halfBorder = borderSize * 0.5f;
+			float halfBorder = borderSize * 0.49f;
 
 			renderer->drawRect(x - halfBorder, y - halfBorder, width + borderSize, height + borderSize, borderColor);
 		}

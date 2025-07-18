@@ -21,6 +21,7 @@
 - **GLFW** - windowing and input
 - **GLAD** - OpenGL loader
 - **GLM**  - Math Library for OpenGL
+- **STBI** - Image loading Library
 - **C++20**
 - No external engine - all rendering and logic is custom-built
 

@@ -159,6 +159,13 @@ namespace pathogen
 		glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, value);
 	}
 
+	void Shader::setVec2(const std::string& name, float value1, float value2) const
+	{
+		const float value[2] = { value1, value2 }; 
+
+		glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, value);
+	}
+
 	void Shader::setVec4(const std::string& name, const float* value) const
 	{
 		glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, value);

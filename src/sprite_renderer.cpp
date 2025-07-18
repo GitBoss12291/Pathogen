@@ -43,8 +43,10 @@ namespace pathogen
         glBindVertexArray(0);
     }
 
+
     // Draw a Sprite on Screen
-    void SpriteRenderer::drawSprite(Sprite& sprite, float x, float y, float camX, float camY)
+    // Optionally use the sprite's texture as an atlas by specifying stepcount cols and rows
+    void SpriteRenderer::drawSprite(Sprite& sprite, float x, float y, float camX, float camY, glm::vec4 color, int stepCount, int cols, int rows)
     {
         if (!shader)
         {
@@ -69,6 +71,29 @@ namespace pathogen
         shader->setMat4("uModel", glm::value_ptr(modelMat));
         shader->setMat4("uProjection", glm::value_ptr(projMat));
         shader->setMat4("uView", glm::value_ptr(viewMat));
+        shader->setVec4("uColor", glm::value_ptr(color));
+
+        if (stepCount > 1 && cols > 0 && rows > 0)
+        {
+            int step = sprite.step;
+            
+            float uStep = 1.0f / cols;
+            float vStep = 1.0f / rows;
+
+            int col = step % cols;
+            int row = step / cols;
+
+            float uOffset = col * uStep;
+            float vOffset = 1.0f - (row + 1) * vStep;
+
+            shader->setVec2("uUVOffset", uOffset, vOffset);
+            shader->setVec2("uUVScale", uStep, vStep);
+        }
+        else
+        {
+            shader->setVec2("uUVOffset", 0.0f, 0.0f);
+            shader->setVec2("uUVScale", 1.0f, 1.0f);
+        }
 
         glBindTexture(GL_TEXTURE_2D, sprite.textureID);
         glBindVertexArray(quadVAO);
@@ -84,7 +109,7 @@ namespace pathogen
         }
 
         float xy[2] = { x, y };
-        float size[2] = { width, height };
+        float size[2] = { width, height}; // multiply by two because the size was in half-pixels before.
         float res[2] = { screenWidth, screenHeight };
 
         uiShader->use();

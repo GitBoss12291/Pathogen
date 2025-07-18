@@ -12,7 +12,9 @@ namespace pathogen
     {
     public:
         void init();
-        void drawSprite(Sprite& sprite, float x, float y, float camX, float camY);
+        void drawSprite(Sprite& sprite, float x, float y, float camX, float camY, 
+            glm::vec4 color = glm::vec4(1.0f), int stepCount = 1, 
+            int cols = 0, int rows = 0);
         void drawRect(float x, float y, float width, float height, glm::vec4 color);
         void shutdown();
 

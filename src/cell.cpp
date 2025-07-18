@@ -29,11 +29,11 @@ namespace pathogen
 
 	void Cell::draw(SpriteRenderer* renderer, float camX, float camY, float x, float y)
 	{
-		renderer->drawSprite(*sprite, x, y, camX, camY);
+		renderer->drawSprite(*sprite, x, y, camX, camY, sprite->color, sprite->maxSteps, sprite->cols, sprite->rows);
 
 		for (auto& part : parts)
 		{
-			part->draw(renderer, camX, camY);
+			part->draw(renderer, camX, camY, partColor);
 		}
 	}
 }

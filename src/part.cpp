@@ -5,13 +5,13 @@
 
 namespace pathogen
 {
-	void Part::draw(SpriteRenderer* renderer, float camX, float camY)
+	void Part::draw(SpriteRenderer* renderer, float camX, float camY, glm::vec4 color)
 	{
 		if (!host) return;
 
 		float x = host->x + offsetX;
 		float y = host->y + offsetY;
 
-		renderer->drawSprite(sprite, x, y, camX, camY);
+		renderer->drawSprite(sprite, x, y, camX, camY, color);
 	}
 }

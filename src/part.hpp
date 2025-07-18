@@ -19,7 +19,7 @@ namespace pathogen
 		Sprite sprite;
 		float offsetX, offsetY;
 		virtual void modifyStats() = 0;
-		virtual void draw(SpriteRenderer* renderer, float camX, float camY);
+		virtual void draw(SpriteRenderer* renderer, float camX, float camY, glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f});
 		virtual ~Part() = default;
 	};
 }

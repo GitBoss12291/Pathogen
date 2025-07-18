@@ -1,6 +1,8 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <unordered_map>
+#include <ctime>
+#include <cstdlib>
 
 #include "game.hpp"
 #include "game_object.hpp"
@@ -32,12 +34,19 @@ namespace pathogen
 	Player* Game::setupPlayer()
 	{
 		auto* player = new Player();
-		player->sprite.texPath = "Pathogen.png";
+		player->sprite.texPath = "cell.png";
+		player->sprite.color = { 0.5f, 0.5, 0.8f, 1.0f };
+		player->sprite.width = 150;
+		player->sprite.height = 150;
+		player->sprite.maxSteps = 14;
+		player->sprite.cols = 7;
+		player->sprite.rows = 4;
+
 
 		Cell playerCell;
 		playerCell.sprite = &player->sprite;
+		playerCell.stats = { playerCell.baseSpeed, playerCell.baseAttack, playerCell.baseDefense };
 		player->cell = playerCell;
-		player->cell.instanceID = getNextID();
 
 		return player;
 	}
@@ -45,6 +54,8 @@ namespace pathogen
 	Enemy* Game::spawnEnemy(Player* player)
 	{
 		auto* enemy = new Enemy();
+		enemy->x = 300.0f;
+		enemy->y = -200.0f;
 		enemy->sprite.texPath = "Pathogen.png";
 		enemy->setPlayer(player);
 		return enemy;
@@ -52,7 +63,10 @@ namespace pathogen
 
 	void Game::init()
 	{
-		state = GameState::Menu();
+		editor = new Editor();
+
+		state = GameState::Edit;
+		std::srand(std::time(0));
 
 		spriteRenderer = new SpriteRenderer();
 		spriteRenderer->init();
@@ -75,8 +89,15 @@ namespace pathogen
 			return;
 		}
 
+		if (!editor)
+		{
+			std::cerr << "ERROR: Editor used before initialization, Initialize Game prior to use." << std::endl;
+			return;
+		}
+
 		spriteRenderer->setWorldOrigin(width / 2.0f, height / 2.0f);
 		spriteRenderer->setScreenDim(width, height);
+		editor->setScreenDim(width, height);
 	}
 
 	// Adds a Game Object and generates a new id if it doesn't have one.
@@ -126,9 +147,19 @@ namespace pathogen
 
 	void Game::draw() const
 	{
-		for (const auto& pair : gameObjects)
+		switch (state)
 		{
-			pair.second->draw(spriteRenderer, camera.x, camera.y);
+		case GameState::Menu:
+			break;
+		case GameState::Play:
+			for (const auto& pair : gameObjects)
+			{
+				pair.second->draw(spriteRenderer, camera.x, camera.y);
+			}
+			break;
+		case GameState::Edit:
+			editor->draw(spriteRenderer, camera.x, camera.y);
+			break;
 		}
 	}
 

@@ -25,6 +25,7 @@ namespace pathogen
 			void setInt(const std::string& name, int value) const;
 			void setFloat(const std::string& name, float value) const;
 			void setVec2(const std::string& name, const float* value) const;
+			void setVec2(const std::string& name, float value1, float value2) const;
 			void setVec4(const std::string& name, const float* value) const;
 			void setMat4(const std::string& name, const float* value) const;
 	};

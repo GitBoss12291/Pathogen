@@ -1,6 +1,6 @@
 // This closely follows the implementation from https://learnopengl.com/Getting-started/Shaders but modified to fit the project, credit goes to Joey de Vries
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <stb_image/stb_image.h>
 #include <sstream>
 
 #include "shader.hpp"

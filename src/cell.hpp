@@ -24,7 +24,7 @@ namespace pathogen
 
 		float x, y;
 
-		glm::vec4 partColor;
+		glm::vec4 partColor = {};
 		CellStats stats;
 		float baseSpeed = 200.0f;
 		float baseDefense = 0.0f;

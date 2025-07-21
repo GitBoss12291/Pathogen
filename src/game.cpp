@@ -14,6 +14,8 @@
 #include "cell.hpp"
 #include "part.hpp"
 #include "editor.hpp"
+#include "ui_text_input.hpp"
+#include "ui_panel.hpp"
 
 namespace pathogen
 {
@@ -61,11 +63,12 @@ namespace pathogen
 		return enemy;
 	}
 
-	void Game::init()
+	void Game::init(int width, int height)
 	{
-		editor = new Editor();
+		editor = new Editor(width, height);
 
-		state = GameState::Edit;
+		state = GameState::Menu;
+		lastState = GameState::Menu;
 		std::srand(std::time(0));
 
 		spriteRenderer = new SpriteRenderer();
@@ -79,6 +82,7 @@ namespace pathogen
 		auto* testEnemy = spawnEnemy(player);
 
 		addGameObject(testEnemy);
+		setScreenDim(width, height);
 	}
 
 	void Game::setScreenDim(int width, int height)
@@ -94,6 +98,9 @@ namespace pathogen
 			std::cerr << "ERROR: Editor used before initialization, Initialize Game prior to use." << std::endl;
 			return;
 		}
+
+		screenWidth = width;
+		screenHeight = height;
 
 		spriteRenderer->setWorldOrigin(width / 2.0f, height / 2.0f);
 		spriteRenderer->setScreenDim(width, height);
@@ -130,16 +137,22 @@ namespace pathogen
 	void Game::tick(float dt)
 	{
 		time += dt;
+		
+		InputHandler::update();
 
 		switch (state)
 		{
 		case GameState::Menu:
+			camera.x = 0.0f;
+			camera.y = 0.0f;
 			menu(dt);
 			break;
 		case GameState::Play:
 			play(dt);
 			break;
 		case GameState::Edit:
+			camera.x = 0.0f;
+			camera.y = 0.0f;
 			edit(dt);
 			break;
 		}
@@ -165,7 +178,21 @@ namespace pathogen
 
 	void Game::menu(float dt)
 	{
-		
+		spriteRenderer->drawText("DISCLAIMER: THIS GAME DOES NOT WORK RIGHT, IS NOT FINISHED, AND HAS NOTHING TO DO",
+			2, 0, screenWidth, 24, { 1.0f, 1.0f, 1.0f, 1.0f }, 16.0f);
+		spriteRenderer->drawText(" PRESS ENTER TO PLAY, AND TAB TO EDIT YOUR CELL, (NOTE: ALL YOU CAN DO IN THE CELL EDITOR IS CHANGE THE LENGTH OR WIDTH OF YOUR CELL.)", 2, (screenHeight / 2) + 50, screenWidth, screenHeight, { 1.0f, 1.0f, 1.0f, 1.0f }, 24.0f);
+	
+		if (InputHandler::getKeyDown(KEY_ENTER))
+		{
+			state = GameState::Play;
+			lastState = GameState::Menu;
+		} 
+
+		if (InputHandler::getKeyDown(KEY_TAB))
+		{
+			state = GameState::Edit;
+			lastState = GameState::Menu;
+		}
 	}
 
 	void Game::play(float dt)
@@ -177,6 +204,15 @@ namespace pathogen
 
 			if (obj->getType() == ObjectType::Player)
 			{
+				if (dynamic_cast<Player*>(obj)->edit)
+				{
+					GameState tempState = state;
+					state = GameState::Edit;
+					lastState = tempState;
+					dynamic_cast<Player*>(obj)->edit = false;
+					obj->sprite.rotation = 0.0f;
+				}
+
 				camera.x = obj->x;
 				camera.y = obj->y;
 			}
@@ -203,6 +239,14 @@ namespace pathogen
 		editor->setTargetCell(&player->cell);
 
 		editor->tick(dt);
+
+		if (editor->exit)
+		{
+			GameState tempState = state;
+			state = lastState;
+			lastState = tempState;
+			editor->exit = false;
+		}
 	}
 
 }

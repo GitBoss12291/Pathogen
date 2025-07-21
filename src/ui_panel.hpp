@@ -13,6 +13,7 @@ namespace pathogen
 		glm::vec4 borderColor;
 		glm::vec4 fillColor;
 
-		void draw(SpriteRenderer* renderer) const;
+		virtual void draw(SpriteRenderer* renderer) const;
+		bool isMouseOver(float mouseX, float mouseY, float screenWidth, float screenHeight) const;
 	};
 }

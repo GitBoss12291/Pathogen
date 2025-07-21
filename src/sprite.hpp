@@ -20,6 +20,6 @@ namespace pathogen
         int rows = 0;
 
         unsigned int textureID = 0;
-        const char* texPath;
+        std::string texPath;
     };
 }

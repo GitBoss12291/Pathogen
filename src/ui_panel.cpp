@@ -14,4 +14,15 @@ namespace pathogen
 
 		renderer->drawRect(x, y, width, height, fillColor);
 	}
+
+	bool UIPanel::isMouseOver(float mouseX, float mouseY, float screenWidth, float screenHeight) const
+	{
+		float screenX = x;
+		float screenY = y;
+
+		return (mouseX >= screenX - (width * 0.5f) &&
+			mouseX <= screenX + (width * 0.5f) &&
+			mouseY >= screenY - (height * 0.5f) &&
+			mouseY <= screenY + (height * 0.5f));
+	}
 }

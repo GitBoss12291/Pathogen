@@ -18,7 +18,9 @@ namespace pathogen
 		PartType type;
 		Sprite sprite;
 		float offsetX, offsetY;
+		float animateSpeed = 0.0f;
 		virtual void modifyStats() = 0;
+		virtual void update(float dt) = 0;
 		virtual void draw(SpriteRenderer* renderer, float camX, float camY, glm::vec4 color = {1.0f, 1.0f, 1.0f, 1.0f});
 		virtual ~Part() = default;
 	};

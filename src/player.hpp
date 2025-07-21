@@ -13,6 +13,8 @@ namespace pathogen
 		void draw(SpriteRenderer* renderer, float camX, float camY) override;
 		ObjectType getType() const override { return ObjectType::Player; }
 
+		bool edit = false;
+
 	private:
 		void move(float dt);
 	};

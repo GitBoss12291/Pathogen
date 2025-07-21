@@ -27,7 +27,7 @@ namespace pathogen
     {
         ~Game();
 
-        void init();
+        void init(int width, int height);
 
         void setScreenDim(int width, int height);
 
@@ -39,6 +39,7 @@ namespace pathogen
         void draw() const;
     
         GameState state = GameState::Menu;
+        GameState lastState = GameState::Menu;
         std::unordered_map<int, GameObject*> gameObjects;
         Camera camera;
         Editor* editor = nullptr;
@@ -55,6 +56,9 @@ namespace pathogen
 
         Player* setupPlayer();
         Enemy* spawnEnemy(Player* player);
+
+        float screenWidth;
+        float screenHeight;
 
         int playerID = -1;
 

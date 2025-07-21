@@ -6,10 +6,20 @@
 
 namespace pathogen
 {
+	const float ROT_UP = 0.0f;
+	const float ROT_DOWN = 180.0f;
+	const float ROT_LEFT = 270.0f;
+	const float ROT_RIGHT = 90.0f;
+
 	void Player::update(float dt)
 	{
 		move(dt);
-	
+		
+		if (InputHandler::getKey(GLFW_KEY_TAB))
+		{
+			edit = true;
+		}
+
 	}
 
 	void Player::draw(SpriteRenderer* renderer, float camX, float camY)
@@ -22,24 +32,35 @@ namespace pathogen
 
 	void Player::move(float dt)
 	{
-		if (InputHandler::getKey(GLFW_KEY_W) == GLFW_PRESS)
-		{
-			y += cell.stats.speed * dt;
-		}
+		bool up = InputHandler::getKey(GLFW_KEY_W) == GLFW_PRESS;
+		bool down = InputHandler::getKey(GLFW_KEY_S) == GLFW_PRESS;
+		bool left = InputHandler::getKey(GLFW_KEY_A) == GLFW_PRESS;
+		bool right = InputHandler::getKey(GLFW_KEY_D) == GLFW_PRESS;
 
-		if (InputHandler::getKey(GLFW_KEY_S) == GLFW_PRESS)
-		{
-			y -= cell.stats.speed * dt;
-		}
+		float dx = 0.0f;
+		float dy = 0.0f;
 
-		if (InputHandler::getKey(GLFW_KEY_A) == GLFW_PRESS)
-		{
-			x -= cell.stats.speed * dt;
-		}
+		if (up) dy += 1.0f;
+		if (down) dy -= 1.0f;
+		if (left) dx -= 1.0f;
+		if (right) dx += 1.0f;
 
-		if (InputHandler::getKey(GLFW_KEY_D) == GLFW_PRESS)
+		if (dx != 0.0f || dy != 0.0f)
 		{
-			x += cell.stats.speed * dt;
+			float length = std::sqrt(dx * dx + dy * dy);
+			dx /= length;
+			dy /= length;
+
+			x += dx * cell.stats.speed * dt;
+			y += dy * cell.stats.speed * dt;
+
+			if (std::abs(dx) > std::abs(dy)) // Clamp rotation to four direcitons (up, down, left, right)
+			{
+				sprite.rotation = dx > 0 ? 90.0f : 270.0f;
+			} else
+			{
+				sprite.rotation = dy > 0 ? 0.0f : 180.0f;
+			}
 		}
 	}
 }

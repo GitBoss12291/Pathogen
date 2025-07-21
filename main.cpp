@@ -51,8 +51,7 @@ static bool initOpenGL()
 
 static void initGame(Game& game)
 {
-	game.init();
-	game.setScreenDim(SCREEN_WIDTH, SCREEN_HEIGHT);
+	game.init(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 int main()

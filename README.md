@@ -22,6 +22,9 @@
 - **GLAD** - OpenGL loader
 - **GLM**  - Math Library for OpenGL
 - **STBI** - Image loading Library
+- **STBIW** - Image write Library
+- **STBTT** - Font loading Library
+- **Nlohmann JSON** JSON Serialization library
 - **C++20**
 - No external engine - all rendering and logic is custom-built
 
@@ -31,7 +34,7 @@
 
 ### Requirements
 
-- CMake 3.20+
+- CMake 3.50+
 - A compiler with full C++20 support
 
 ### Instructions
